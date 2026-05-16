@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soul Glow Studio — Spiritual Tools for Aesthetic Creators</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #FAF7F2;
+  --blush: #F2E6DF;
+  --dusty-rose: #D4A5A0;
+  --deep-rose: #9C5F5A;
+  --plum: #3D2438;
+  --gold: #C9A96E;
+  --gold-light: #E8D5B0;
+  --warm-white: #FFFCF8;
+  --text-dark: #1E1218;
+  --text-mid: #6B4E5A;
+  --text-light: #A8896F;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem 2.5rem;
+  background: rgba(250,247,242,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid rgba(201,169,110,0.25);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--plum);
+}
+.nav-logo span { color: var(--gold); font-style: italic; }
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a {
+  font-size: 13px; font-weight: 400; letter-spacing: 0.06em;
+  color: var(--text-mid); text-decoration: none; text-transform: uppercase;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--plum); }
+.nav-cta {
+  background: var(--plum); color: var(--cream) !important;
+  padding: 8px 20px; border-radius: 2px;
+}
+.nav-cta:hover { background: var(--deep-rose) !important; color: var(--warm-white) !important; }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 8rem 2rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, #EDD9CF 0%, var(--cream) 70%);
+}
+.hero-orb {
+  position: absolute; border-radius: 50%;
+  background: var(--gold-light); opacity: 0.25; filter: blur(60px);
+}
+.hero-orb-1 { width: 400px; height: 400px; top: -80px; right: -80px; }
+.hero-orb-2 { width: 300px; height: 300px; bottom: 40px; left: -60px; background: var(--dusty-rose); opacity: 0.2; }
+.hero-content { position: relative; z-index: 1; max-width: 700px; }
+.hero-eyebrow {
+  font-size: 11px; font-weight: 500; letter-spacing: .18em;
+  color: var(--gold); text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  animation: fadeUp .8s ease both;
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-weight: 300; line-height: 1.05;
+  color: var(--plum);
+  margin-bottom: 1.5rem;
+  animation: fadeUp .8s .1s ease both;
+}
+.hero-title em { font-style: italic; color: var(--deep-rose); }
+.hero-sub {
+  font-size: 1rem; font-weight: 300; line-height: 1.8;
+  color: var(--text-mid); max-width: 480px; margin: 0 auto 2.5rem;
+  animation: fadeUp .8s .2s ease both;
+}
+.hero-actions {
+  display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+  animation: fadeUp .8s .3s ease both;
+}
+.btn-primary {
+  display: inline-block; padding: 14px 36px;
+  background: var(--plum); color: var(--cream);
+  font-size: 13px; font-weight: 500; letter-spacing: .08em;
+  text-transform: uppercase; text-decoration: none; border-radius: 2px;
+  transition: background .2s, transform .15s;
+}
+.btn-primary:hover { background: var(--deep-rose); transform: translateY(-1px); }
+.btn-secondary {
+  display: inline-block; padding: 14px 36px;
+  border: 1px solid var(--gold); color: var(--gold);
+  font-size: 13px; font-weight: 500; letter-spacing: .08em;
+  text-transform: uppercase; text-decoration: none; border-radius: 2px;
+  transition: all .2s;
+}
+.btn-secondary:hover { background: var(--gold); color: var(--plum); transform: translateY(-1px); }
+
+/* MARQUEE */
+.marquee-strip {
+  background: var(--plum); color: var(--gold-light);
+  padding: .75rem 0; overflow: hidden;
+  font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+}
+.marquee-inner {
+  display: flex; gap: 3rem; width: max-content;
+  animation: marquee 20s linear infinite;
+}
+.marquee-inner span { white-space: nowrap; }
+.marquee-dot { color: var(--dusty-rose); margin: 0 .5rem; }
+
+/* IDENTITY STRIP */
+.identity {
+  padding: 5rem 2.5rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: center; max-width: 1100px; margin: 0 auto;
+}
+.identity-text .eyebrow {
+  font-size: 11px; font-weight: 500; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;
+}
+.identity-text h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300;
+  color: var(--plum); line-height: 1.2; margin-bottom: 1.5rem;
+}
+.identity-text h2 em { font-style: italic; color: var(--deep-rose); }
+.identity-text p {
+  font-size: .95rem; line-height: 1.9; color: var(--text-mid);
+  margin-bottom: 1rem;
+}
+.identity-pillars {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+}
+.pillar {
+  background: var(--warm-white); border: 0.5px solid rgba(201,169,110,0.3);
+  border-radius: 4px; padding: 1.25rem;
+}
+.pillar-icon { font-size: 1.5rem; margin-bottom: .5rem; }
+.pillar h4 { font-size: .85rem; font-weight: 500; color: var(--plum); margin-bottom: .25rem; }
+.pillar p { font-size: .8rem; color: var(--text-light); line-height: 1.6; }
+
+/* PRODUCTS */
+.products { padding: 5rem 2.5rem; background: var(--warm-white); }
+.section-header { text-align: center; max-width: 600px; margin: 0 auto 3.5rem; }
+.section-header .eyebrow {
+  font-size: 11px; font-weight: 500; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; display: block;
+}
+.section-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3rem); font-weight: 300;
+  color: var(--plum); line-height: 1.2;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem; max-width: 1100px; margin: 0 auto;
+}
+.product-card {
+  background: var(--cream); border: 0.5px solid rgba(201,169,110,0.25);
+  border-radius: 4px; overflow: hidden;
+  transition: transform .25s, box-shadow .25s;
+  text-decoration: none; display: block; color: inherit;
+}
+.product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(61,36,56,0.1); }
+.product-img {
+  height: 200px; background: var(--blush);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.product-emoji { font-size: 3.5rem; }
+.product-category {
+  position: absolute; top: 12px; left: 12px;
+  font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+  background: var(--plum); color: var(--gold-light);
+  padding: 4px 10px; border-radius: 2px;
+}
+.product-body { padding: 1.25rem; }
+.product-body h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem; font-weight: 400;
+  color: var(--plum); margin-bottom: .5rem; line-height: 1.3;
+}
+.product-body p { font-size: .82rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 1rem; }
+.product-footer { display: flex; align-items: center; justify-content: space-between; }
+.product-price {
+  font-size: 1.1rem; font-weight: 500; color: var(--deep-rose);
+}
+.product-price .old { font-size: .8rem; color: var(--text-light); text-decoration: line-through; margin-left: 6px; }
+.product-buy {
+  font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--gold); border: 1px solid var(--gold);
+  padding: 6px 14px; border-radius: 2px;
+  transition: all .2s;
+}
+.product-card:hover .product-buy { background: var(--gold); color: var(--plum); }
+
+/* BUNDLE */
+.bundle-section {
+  padding: 5rem 2.5rem;
+  background: var(--plum);
+  text-align: center;
+}
+.bundle-section .eyebrow {
+  font-size: 11px; font-weight: 500; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--dusty-rose); margin-bottom: 1rem; display: block;
+}
+.bundle-section h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3rem); font-weight: 300;
+  color: var(--cream); line-height: 1.2; margin-bottom: 1rem;
+}
+.bundle-section h2 em { font-style: italic; color: var(--gold); }
+.bundle-section p { font-size: .95rem; color: var(--dusty-rose); max-width: 480px; margin: 0 auto 2.5rem; line-height: 1.8; }
+.bundle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 700px; margin: 0 auto 2.5rem; }
+.bundle-card {
+  background: rgba(255,255,255,0.07); border: 0.5px solid rgba(201,169,110,0.3);
+  border-radius: 4px; padding: 1.5rem;
+  text-align: left;
+}
+.bundle-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: var(--gold); margin-bottom: .5rem; }
+.bundle-card p { font-size: .8rem; color: rgba(250,247,242,0.6); line-height: 1.7; margin-bottom: 1rem; }
+.bundle-price { font-size: 1.5rem; font-weight: 500; color: var(--cream); }
+.bundle-save { font-size: .75rem; color: var(--dusty-rose); margin-left: 8px; }
+
+/* FREE GIFT */
+.freebie {
+  padding: 5rem 2.5rem; background: var(--blush); text-align: center;
+}
+.freebie .eyebrow {
+  font-size: 11px; font-weight: 500; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--deep-rose); margin-bottom: 1rem; display: block;
+}
+.freebie h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3rem); font-weight: 300;
+  color: var(--plum); margin-bottom: 1rem;
+}
+.freebie h2 em { font-style: italic; color: var(--gold); }
+.freebie p { font-size: .95rem; color: var(--text-mid); max-width: 420px; margin: 0 auto 2rem; line-height: 1.8; }
+.email-form { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; max-width: 440px; margin: 0 auto; }
+.email-form input {
+  flex: 1; min-width: 220px; padding: 13px 18px;
+  border: 1px solid rgba(201,169,110,0.4); border-radius: 2px;
+  background: var(--warm-white); font-family: 'DM Sans', sans-serif;
+  font-size: 14px; color: var(--text-dark); outline: none;
+}
+.email-form input:focus { border-color: var(--gold); }
+.email-form button {
+  padding: 13px 24px; background: var(--plum); color: var(--cream);
+  border: none; border-radius: 2px; font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 500; letter-spacing: .06em;
+  text-transform: uppercase; cursor: pointer; transition: background .2s;
+}
+.email-form button:hover { background: var(--deep-rose); }
+
+/* SOCIAL */
+.social-section {
+  padding: 4rem 2.5rem; text-align: center;
+}
+.social-section h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem; font-weight: 300; color: var(--plum); margin-bottom: .5rem;
+}
+.social-section p { font-size: .9rem; color: var(--text-mid); margin-bottom: 2rem; }
+.social-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.social-btn {
+  display: inline-flex; align-items: center; gap: .6rem;
+  padding: 12px 24px; border-radius: 2px;
+  font-size: 13px; font-weight: 500; text-decoration: none;
+  transition: all .2s;
+}
+.social-ig { background: var(--cream); border: 1px solid var(--dusty-rose); color: var(--deep-rose); }
+.social-ig:hover { background: var(--deep-rose); color: var(--cream); }
+.social-tt { background: var(--cream); border: 1px solid var(--plum); color: var(--plum); }
+.social-tt:hover { background: var(--plum); color: var(--cream); }
+.social-wa { background: var(--cream); border: 1px solid #25D366; color: #1a9e4c; }
+.social-wa:hover { background: #25D366; color: white; }
+
+/* FOOTER */
+footer {
+  background: var(--plum); color: rgba(250,247,242,0.5);
+  padding: 2.5rem 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+footer .footer-logo {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.2rem;
+  font-weight: 300; color: var(--gold);
+}
+footer p { font-size: .8rem; }
+footer a { color: var(--dusty-rose); text-decoration: none; font-size: .8rem; }
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* RESPONSIVE */
+@media (max-width: 720px) {
+  nav { padding: 1rem 1.25rem; }
+  .nav-links { display: none; }
+  .identity { grid-template-columns: 1fr; gap: 2rem; }
+  .bundle-grid { grid-template-columns: 1fr; }
+  .hero-title { font-size: 2.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Soul <span>Glow</span> Studio</div>
+  <div class="nav-links">
+    <a href="#products">Shop</a>
+    <a href="#bundles">Bundles</a>
+    <a href="#freebie">Free gift</a>
+    <a href="https://payhip.com/SoulGlowStudiio" class="nav-cta" target="_blank">Visit store</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Soul Glow Studio — digital downloads</p>
+    <h1 class="hero-title">Spiritual tools for<br><em>aesthetic creators</em></h1>
+    <p class="hero-sub">Affirmation kits, manifestation tools, and premium design assets — made for your glow-up era.</p>
+    <div class="hero-actions">
+      <a href="https://payhip.com/SoulGlowStudiio" class="btn-primary" target="_blank">Shop all products</a>
+      <a href="#freebie" class="btn-secondary">Get a free gift</a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>Instant download<span class="marquee-dot">&#8729;</span></span>
+    <span>Affirmation cards<span class="marquee-dot">&#8729;</span></span>
+    <span>Manifestation kits<span class="marquee-dot">&#8729;</span></span>
+    <span>Design assets<span class="marquee-dot">&#8729;</span></span>
+    <span>Creator tools<span class="marquee-dot">&#8729;</span></span>
+    <span>Glow up your brand<span class="marquee-dot">&#8729;</span></span>
+    <span>Soul Glow Studio<span class="marquee-dot">&#8729;</span></span>
+    <span>Instant download<span class="marquee-dot">&#8729;</span></span>
+    <span>Affirmation cards<span class="marquee-dot">&#8729;</span></span>
+    <span>Manifestation kits<span class="marquee-dot">&#8729;</span></span>
+    <span>Design assets<span class="marquee-dot">&#8729;</span></span>
+    <span>Creator tools<span class="marquee-dot">&#8729;</span></span>
+    <span>Glow up your brand<span class="marquee-dot">&#8729;</span></span>
+    <span>Soul Glow Studio<span class="marquee-dot">&#8729;</span></span>
+  </div>
+</div>
+
+<!-- IDENTITY -->
+<section class="identity">
+  <div class="identity-text">
+    <p class="eyebrow">Who we are</p>
+    <h2>Where <em>creativity</em><br>meets your glow</h2>
+    <p>Soul Glow Studio creates digital tools that nurture both your inner world and your creative craft. Whether you're manifesting your dream life or building your brand aesthetic — we've got the kit for it.</p>
+    <p>Every product is designed with intention, downloadable instantly, and built to help you show up as your most radiant self.</p>
+  </div>
+  <div class="identity-pillars">
+    <div class="pillar">
+      <div class="pillar-icon">&#10024;</div>
+      <h4>Spiritual tools</h4>
+      <p>Affirmations, manifestation kits, and abundance resources</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">&#127774;</div>
+      <h4>Aesthetic design</h4>
+      <p>Mockups, brand kits, and visual assets for creators</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">&#9889;</div>
+      <h4>Instant access</h4>
+      <p>Download immediately after purchase — no waiting</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">&#128144;</div>
+      <h4>Made with soul</h4>
+      <p>Every product crafted with care, intention, and aesthetic detail</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="section-header">
+    <span class="eyebrow">Digital downloads</span>
+    <h2>Shop the collection</h2>
+  </div>
+  <div class="product-grid">
+
+    <a href="https://payhip.com/b/xcD6L" class="product-card" target="_blank">
+      <div class="product-img" style="background:#F2E6DF;">
+        <span class="product-emoji">&#127775;</span>
+        <span class="product-category">Affirmations</span>
+      </div>
+      <div class="product-body">
+        <h3>Lucky Girl Affirmation Cards</h3>
+        <p>Printable affirmation cards rooted in the lucky girl mindset. Shift your energy, elevate your frequency, and manifest with intention every single day.</p>
+        <div class="product-footer">
+          <div class="product-price">$7.00 <span class="old">$2.50</span></div>
+          <span class="product-buy">Get it now</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://payhip.com/b/zk5AL" class="product-card" target="_blank">
+      <div class="product-img" style="background:#EDE0F5;">
+        <span class="product-emoji">&#127774;</span>
+        <span class="product-category">Manifestation</span>
+      </div>
+      <div class="product-body">
+        <h3>Self Love & Abundance Manifestation Kit</h3>
+        <p>A complete digital kit to rewire your mindset for love and abundance. Includes journaling prompts, rituals, affirmations, and a 30-day practice guide.</p>
+        <div class="product-footer">
+          <div class="product-price">$12.00 <span class="old">$5.50</span></div>
+          <span class="product-buy">Get it now</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://payhip.com/b/gPUz7" class="product-card" target="_blank">
+      <div class="product-img" style="background:#E8E4F0;">
+        <span class="product-emoji">&#128248;</span>
+        <span class="product-category">Design assets</span>
+      </div>
+      <div class="product-body">
+        <h3>Vintage Grunge Rhinestone Smoke Mockup Bundle</h3>
+        <p>Elevate your merch designs with this edgy aesthetic t-shirt mockup bundle. Y2K grunge meets rhinestone glamour — perfect for Canva and Photoshop.</p>
+        <div class="product-footer">
+          <div class="product-price">$9.00 <span class="old">$2.50</span></div>
+          <span class="product-buy">Get it now</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://payhip.com/b/N63fr" class="product-card" target="_blank">
+      <div class="product-img" style="background:#F5EDE8;">
+        <span class="product-emoji">&#128150;</span>
+        <span class="product-category">Affirmations</span>
+      </div>
+      <div class="product-body">
+        <h3>30 Positive Affirmations for Self Love & Abundance</h3>
+        <p>Thirty powerful affirmations to start every morning with intention. Beautifully designed for printing, screensaving, or daily journaling practice.</p>
+        <div class="product-footer">
+          <div class="product-price">$5.00 <span class="old">$3.00</span></div>
+          <span class="product-buy">Get it now</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+  <div style="text-align:center; margin-top:3rem;">
+    <a href="https://payhip.com/SoulGlowStudiio" class="btn-primary" target="_blank">View all products</a>
+  </div>
+</section>
+
+<!-- BUNDLES -->
+<section class="bundle-section" id="bundles">
+  <span class="eyebrow">More value, more glow</span>
+  <h2>Shop the <em>bundles</em></h2>
+  <p>Save when you bundle. Curated combinations designed to take you further — spiritually and creatively.</p>
+  <div class="bundle-grid">
+    <div class="bundle-card">
+      <h4>The Glow-Up Bundle</h4>
+      <p>Lucky Girl Affirmation Cards + Self Love & Abundance Kit — everything you need to shift into your highest self.</p>
+      <div>
+        <span class="bundle-price">$19</span>
+        <span class="bundle-save">Save $8</span>
+      </div>
+    </div>
+    <div class="bundle-card">
+      <h4>Creator Starter Pack</h4>
+      <p>Rhinestone Mockup Bundle + coming soon: Brand Kit for Creators. Build the aesthetic brand you've been dreaming of.</p>
+      <div>
+        <span class="bundle-price">$20</span>
+        <span class="bundle-save">Save $7</span>
+      </div>
+    </div>
+  </div>
+  <a href="https://payhip.com/SoulGlowStudiio" class="btn-secondary" target="_blank">Shop bundles on Payhip</a>
+</section>
+
+<!-- FREE GIFT -->
+<section class="freebie" id="freebie">
+  <span class="eyebrow">Free gift for you</span>
+  <h2>Your <em>free</em> glow-up starter kit</h2>
+  <p>3 powerful affirmations for the glow-up era — delivered straight to your inbox, on us. Join the Soul Glow community.</p>
+  <div class="email-form">
+    <input type="email" placeholder="Your email address" id="email-input">
+    <button onclick="handleEmail()">Send my kit</button>
+  </div>
+  <p style="font-size:.78rem;color:var(--text-light);margin-top:1rem;">No spam. Unsubscribe any time. Pure glow, always.</p>
+</section>
+
+<!-- SOCIAL -->
+<section class="social-section">
+  <h3>Follow the glow</h3>
+  <p>Join us on Instagram and TikTok for daily design tips, affirmations, and behind-the-scenes magic.</p>
+  <div class="social-links">
+    <a href="https://www.instagram.com/soulglowstudiio/" class="social-btn social-ig" target="_blank">
+      &#9825; @soulglowstudiio on Instagram
+    </a>
+    <a href="https://www.tiktok.com/@soulglowstudiio" class="social-btn social-tt" target="_blank">
+      &#9654; @soulglowstudiio on TikTok
+    </a>
+    <a href="https://wa.me/971555338890" class="social-btn social-wa" target="_blank">
+      &#9993; Chat with us on WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Soul Glow Studio</div>
+  <p>&#169; 2026 Soul Glow Studio. All rights reserved.</p>
+  <div style="display:flex;gap:1.5rem;">
+    <a href="https://payhip.com/SoulGlowStudiio" target="_blank">Payhip store</a>
+    <a href="mailto:soulglowstudio.contact@gmail.com">Email us</a>
+  </div>
+</footer>
+
+<script>
+function handleEmail() {
+  const input = document.getElementById('email-input');
+  if (!input.value || !input.value.includes('@')) {
+    input.style.borderColor = '#D4A5A0';
+    input.placeholder = 'Please enter a valid email';
+    return;
+  }
+  input.parentElement.innerHTML = '<p style="font-size:1rem;font-weight:500;color:#3D2438;padding:1rem;">Your free kit is on its way! Check your inbox. &#10024;</p>';
+}
+</script>
+</body>
+</html>
